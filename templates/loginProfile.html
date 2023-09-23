@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DashBoard</title>
+
+    <style>
+        #newback{
+            background: rgba(245, 169, 29, 0.8)
+        }
+      
+        .maindiv{
+            position: relative;
+            z-index:1;
+    
+        }
+
+        body{
+            overflow:hidden;
+        }
+
+  
+        .displayuser{
+            width:50%;
+            text-align:center;
+            margin-left:22%;
+            margin-top:5%;
+                      
+         
+        }
+       
+        
+        .name{
+            font-size:80%;
+            text-transform:uppercase;
+            margin-top:1%;
+            color:white;
+
+        }
+
+        .name2{
+            font-size:100%;
+            text-transform:capitalize;
+            font-weight:bold;
+            margin-top:1%;
+
+        }
+
+    
+
+        .h1{
+            background:yellow;
+            height:100px;
+        }
+
+        .h3{
+            margin-left:3%;
+            color:white;
+            
+           
+        }
+
+        #hr{
+            margin-top:-1%;
+        }
+
+        .back{
+            background:url('https://cdn.wallpapersafari.com/64/69/hAqoTP.jpg');
+            background-size:cover;
+            background-repeat:no-repeat;
+            height:800px;
+            margin-top:-1%;
+        }
+
+        
+        
+       
+      
+       
+    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+
+<body>
+    
+
+<div class="maindiv">
+
+   <div class="h1"><p align="center" >Django Chat</p></div>
+
+    <hr id="hr" class="border border-black border-2 opacity-50">
+<div class="back">
+    <div  class="h3">
+        <span style="color:white;">Login_Profile </span><br>
+
+
+    {% for profile in mydata %}
+    <div class="name">
+       {{profile.name}} 
+    </div>
+
+        {% endfor %}
+    </div>
+    
+    
+     <div class="displayuser" align="center">
+
+
+
+        <table border="2px" class="table table-hover " >
+            <tr>
+            <th  colspan=2 width="80%" style="font-size:150%;background:#de1d54;" id="newback">Friend List</th>
+            </tr>
+            {% for data in data2 %}
+            {% for profile in mydata %}
+        
+            <tr>
+            
+        <form action="chat" method="post">
+          
+            {% csrf_token %}
+
+            
+        
+            <td id="newback">
+                <div class="name2">
+                {{data.name}} 
+                </div>
+            </td>
+            <td id="newback">
+            {% comment %} <input type="submit" name="chat"  value="{{data.email}}/{{profile.email}}"> {% endcomment %}
+            <button class="btn btn-danger"  type="submit" name="chat" value="{{data.email}}/{{profile.email}}">Chat</button>
+        
+        </td>
+            </tr>
+            {% endfor %}
+             {% endfor %}
+            
+        
+        </form>
+           
+
+        </table>
+
+    
+
+    </div>
+
+
+</div>
+
+</div>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+</body>
+</html>

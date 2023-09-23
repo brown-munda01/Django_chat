@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+           overflow: hidden;
+           background:url('https://e0.pxfuel.com/wallpapers/857/313/desktop-wallpaper-social-media.jpg');
+        }
+        .msgDisplay{
+            overflow:scroll;
+            width: 100%;
+            border:1px solid black;
+            height:430px;
+            background:url('https://img.freepik.com/free-vector/social-media-icons_53876-89125.jpg');
+            background-size:cover;
+            background-repeat:no-repeat;
+        }
+
+        .messageBox{
+            width: 100%;
+            height:30px;
+        }
+
+
+        .friend_message{
+            border-radius:20px;
+            font-size:25px;
+            font-family:sans-serif;
+            float:left;
+            width:auto;
+            height:auto;
+            margin-top:9%;
+            background-color:#1bd3f7;
+            color:white;
+            margin:2%;
+            padding:1%;
+            border:1px solid white;
+        
+
+        }
+        .my_message{
+            border-radius:20px;
+            font-size:25px;
+            font-family:sans-serif;
+            float:right;
+            width:auto;
+            height:auto;
+            padding:1%;
+            border:1px solid white;
+        
+            background-color:#03fc56;
+            color:white;
+            margin:2%;
+        }
+        .profile{
+            float:right;
+            width:40px;
+            height:40px;
+            border: 2px solid black;
+            border-radius:50%;
+            margin-top:2.5%;
+
+            margin-right:2%;
+            font-weight:bold;
+            text-align:center;
+            font-size:100%;
+            background:grey;
+            color:white;
+           
+        }
+
+        .profilefriend{
+            float:left;
+            width:40px;
+            height:40px;
+            border: 2px solid black;
+            border-radius:50%;
+            margin-left:2%;
+            margin-top:2.5%;
+            font-weight:bold;
+            text-align:center;
+            font-size:100%;
+            background:green;
+            color:white;
+    
+           
+        }
+        .profilefriend p{
+            margin-top:18%;
+        }
+
+        .profile p{
+         margin:0; 
+         margin-top:18%;  
+
+        }
+        .maindiv{
+            color:white;
+            font-size:110%;
+        }
+
+       
+    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+    <script>
+    
+
+       
+
+            window.onload = function(){
+              flag="{{fl}}"
+              if(flag==''){
+                 document.forms.chatForm.sendbutton.click();
+
+              }
+            }
+          
+    </script>
+</head>
+<body>
+
+   
+
+
+    <div class="maindiv">
+        Profile Name <br>
+        {{friend_email}} <br>
+    
+        <center>
+        Chat with Friend <br>
+       {{profile_email}}</center>
+    </div>
+
+
+    <div class="msgDisplay">
+
+
+
+        {% for chat in chats %}
+        
+        {% if chat.my_message != 'None'  %}
+        
+        <div class="profile">
+                <p>ME</p>        
+
+        </div>
+
+        <div class="my_message">
+
+           
+            {{chat.my_message}}
+            
+        </div>
+        <br><br><br><br><br><br>
+        {% endif %}
+
+        {% if chat.friend_message != 'None'  %}
+
+        <div class="profilefriend">
+             <p>FR.</p>           
+
+        </div>
+        <div class="friend_message">
+          
+
+            {{chat.friend_message}}
+        </div>
+        <br><br><br><br><br><br>
+        {% endif %}
+       
+        {% endfor %}
+
+       
+       
+        {% comment %} {% for chat in chats %}
+        {% if chat.friend_message != 'None'  %}
+
+        <div class="profilefriend">
+             <p>FR.</p>           
+
+        </div>
+        <div class="friend_message">
+          
+
+            {{chat.friend_message}}
+        </div>
+        <br><br><br><br><br><br>
+        {% endif %}
+        {% endfor %}
+         {% endcomment %}
+
+    </div>
+
+    
+     <form name="chatForm" action="displayChat" method="post">
+        {% csrf_token %} 
+
+    <div class="messageBox">
+        <div class="row g-2 " style="width:100%;float:left;">
+            <div class="col-md"   >
+              <div class="form-floating inputmsg"  >
+                <input style="background:#dfe6f2" name="message"  type="text" class="form-control " id="floatingInputGrid" placeholder="Type message here">
+                <label for="floatingnputGrid"  >Type Message here</label>
+              </div>
+            </div>
+
+       
+          <button style="width:10%;float:left;" name="sendbutton"  class="btn btn-primary" type="submit" value="{{profile_email}}/{{friend_email}}">Send</button>
+
+    </div>
+
+    </form>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+</body>
+</html>
